@@ -1,0 +1,38 @@
+{% extends 'navbar.html' %} 
+{% block title_block %} Home {% endblock %}
+
+{% block css_block %}
+<style>
+    .col-sm-6{
+        width: 450px;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block body_block %} 
+<h2>It's Streaming</h2>
+{% if search %}
+{% for video in result %}
+<p><a href="{% url 'Its_Streaming_App:video_about' slug=video.slug %}">{{video.video_title}}</a></p>
+{% endfor %}
+{% else %}
+
+<div class="video-list">
+    <div class="row">
+        {% for video in result %}
+        <div class="col-sm-6">
+            <a href="{% url 'Its_Streaming_App:video_about' slug=video.slug %}"><img src="/media/{{video.thumbnail}}" width="450px" alt=""></a>
+            <h3>{{video.video_title}}</h3>
+            <img src="/media/{{video.user.user_profile.profile_pic}}" alt="" width="20px" height="20px" class="rounded-circle">{{video.user.username}}
+            <br>
+            <small class="text-muted"><p>Upload date: </p>{{video.upload_date}}</small>
+            <br>
+            <small class="text-muted"><p>Update date: </p>{{video.update_date}}</small>
+            <p>{{video.video_comment.count}} Comments</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

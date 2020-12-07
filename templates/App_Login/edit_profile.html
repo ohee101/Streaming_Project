@@ -1,0 +1,24 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Edit profile {% endblock %}
+{% block css_block %}
+<style>
+    .edit-profile{
+        width: 700px;
+        border: 1px solid #cccc7c;
+        padding: 40px;
+    }
+</style>
+{% endblock %}
+{% block body_block %}
+
+<div class='edit-profile'>
+    <h5>Edit Your profile</h5>
+    <form method="POST" enctype="multipart/form-data">
+      {{ form|crispy}}
+      {% csrf_token %}
+      <button type="submit" style="width:100%" class="btn btn-danger">Update</button>
+    </form>
+  </div>
+
+{% endblock %}
